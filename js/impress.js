@@ -138,6 +138,21 @@
         return " perspective(" + p + "px) ";
     };
 
+    // `origin` builds a transform-origin string for given data.
+    var origin = function ( o ) {
+        var oStr = "";
+        if(o.x !== undefined) {
+            oStr += " " + o.x;
+        }
+        if(o.y !== undefined) {
+            oStr += " " + o.y;
+        }
+        if(o.z !== undefined) {
+            oStr += " " + o.z;
+        }
+        return oStr || undefined;
+    };
+
     // `getElementFromHash` returns an element located by id from hash part of
     // window location.
     var getElementFromHash = function () {
@@ -311,6 +326,11 @@
                             y: toNumber(data.rotateY),
                             z: toNumber(data.rotateZ || data.rotate)
                         },
+                    origin: {
+                        x: data.originX || data.origin,
+                        y: data.originY,
+                        z: data.originZ
+                    },
                         scale: toNumber(data.scale, 1),
                         perspective: config.perspective/windowScale,
                         el: el
@@ -329,7 +349,8 @@
                                rotate(step.rotate) +
                                scale(step.scale) +
                                perspective(step.perspective),
-                    transformStyle: "preserve-3d"
+                transformStyle: "preserve-3d"
+                transformOrigin: origin(step.origin)
                 });
             };
         };
