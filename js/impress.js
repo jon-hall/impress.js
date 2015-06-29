@@ -349,7 +349,7 @@
                                rotate(step.rotate) +
                                scale(step.scale) +
                                perspective(step.perspective),
-                transformStyle: "preserve-3d"
+                transformStyle: "preserve-3d",
                 transformOrigin: origin(step.origin)
                 });
             };
